@@ -1,0 +1,251 @@
+version: '2.3'
+services:
+  mysql5-7:
+    image: mysql:5.7
+    restart: "always"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./files/mysql-5.7.conf:/etc/mysql/conf.d:rw
+      - ./files/mysql-5.7:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "3306:3306"
+
+  mysql8-0:
+    image: mysql:8.0
+    restart: "always"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./files/mysql-8.0.conf:/etc/mysql/conf.d:rw
+      - ./files/mysql-8.0:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "3307:3306"
+
+  mysql8-1:
+    image: mysql:8.1
+    restart: "always"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./files/mysql-8.1.conf:/etc/mysql/conf.d:rw
+      - ./files/mysql-8.1:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "3308:3306"
+
+  mariadb10-2:
+    image: mariadb:10.2
+    restart: "always"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.2.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.2:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "4306:3306"
+
+  mariadb10-3:
+    image: mariadb:10.3
+    restart: "always"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.3.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.3:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "4307:3306"
+
+  mariadb10-4:
+    image: mariadb:10.4
+    restart: "always"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.4.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.4:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "4308:3306"
+
+  mariadb10-5:
+    image: mariadb:10.5
+    restart: "always"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.5.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.5:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "4309:3306"
+
+  mariadb10-6:
+    image: mariadb:10.6
+    restart: "always"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.6.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.6:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "4310:3306"
+
+  mariadb10-7:
+    image: mariadb:10.7
+    restart: "always"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.7.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.7:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "4311:3306"
+
+  mariadb10-8:
+    image: mariadb:10.8
+    restart: "always"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.8.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.8:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "4312:3306"
+
+  mariadb10-9:
+    image: mariadb:10.9
+    restart: "always"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.9.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.9:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "4313:3306"
+
+  mariadb10-10:
+    image: mariadb:10.10
+    restart: "always"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.10.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.10:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "4314:3306"
+
+  mariadb10-11:
+    image: mariadb:10.11
+    restart: "always"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.11.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.11:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "4315:3306"
+
+  mariadb11-0:
+    image: mariadb:11.0
+    restart: "always"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-11.0.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-11.0:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "4316:3306"
+
+  mariadb11-1:
+    image: mariadb:11.1
+    restart: "always"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-11.1.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-11.1:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "4317:3306"
+
+  postgres10:
+    image: postgres:10-alpine
+    restart: "always"
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: root
+    volumes:      
+      - ./files/postgres-10:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "5432:5432"
+
+  postgres11:
+    image: postgres:11-alpine
+    restart: "always"
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: root
+    volumes:      
+      - ./files/postgres-11:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "5433:5432"
+
+  postgres12:
+    image: postgres:12-alpine
+    restart: "always"
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: root
+    volumes:      
+      - ./files/postgres-12:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "5434:5432"
+
+  postgres13:
+    image: postgres:13-alpine
+    restart: "always"
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: root
+    volumes:      
+      - ./files/postgres-13:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "5435:5432"
+
+  postgres14:
+    image: postgres:14-alpine
+    restart: "always"
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: root
+    volumes:      
+      - ./files/postgres-14:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "5436:5432"
+
+  postgres15:
+    image: postgres:15-alpine
+    restart: "always"
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: root
+    volumes:      
+      - ./files/postgres-15:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "5437:5432"
+
+  postgres16:
+    image: postgres:16-alpine
+    restart: "always"
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: root
+    volumes:      
+      - ./files/postgres-16:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "5438:5432"
+

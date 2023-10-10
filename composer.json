@@ -1,0 +1,8 @@
+{
+    "require": {
+        "doctrine/dbal": "^3.7"
+    },
+    "autoload": {
+        "psr-0": {"": "src/"}
+    }
+}
