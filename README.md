@@ -29,16 +29,9 @@ The first parameter references what task is executed. The subdirectory `tasks` g
 
 The second and third parameters is a docker prefix/suffix, if your docker-containers are actually outside of this repository. This is used for accessing a docker container by name: "[dockerPrefix]-[database-type][database-version]-[dockerSuffix]"
 
-That iterates all existing versions and execute two files that you can create:
-
-`init.php` - Table structures / Databases
-`query.php` - The query (ONE) you want to run.
-
 # TODO
 
 * Refactor out old pdo code
 * Create a better event/hook api instead of requiring init.php/query.php files
-* Move these "tasks" into their own directory
-* Move fixture also into tasks, so that different tasks can be executed.
 
 This script was purely conceived for a quick-and-dirty check of a specific QueryBuilder syntax
