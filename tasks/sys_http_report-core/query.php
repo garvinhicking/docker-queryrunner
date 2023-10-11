@@ -87,6 +87,16 @@ applySummaryJoin(
     $expr->eq('report.uuid', 'res_uuid.uuid')
 );
 
-$queryResult = $queryBuilder
+$_queryResult = $queryBuilder
     ->select('report.*')
-    ->executeQuery()->fetchAllAssociative();
+    ->orderBy('report.created', 'desc')
+    ->andWhere(
+        (string)$expr->and(
+            $expr->eq('report.status', '0'),
+            $expr->eq('report.type', "'csp-report'")
+        )
+    );
+
+echo $_queryResult->getSQL();
+
+$queryResult = $_queryResult->executeQuery()->fetchAllAssociative();
