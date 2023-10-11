@@ -72,7 +72,7 @@ foreach($dbs AS $dbType => $dbVersions) {
         $docker_port = $ports[$dbType];
         $pdoDriver = $pdoMap[$dbType];
 
-        echo "[+] Connecting to $docker_name : $docker_port via PDO[$pdoDriver]\n";
+        echo "[+] Connecting to $docker_name : $docker_port via $mode [$pdoDriver]\n";
 
         if (!isset($PDOavail[$pdoDriver])) {
             echo "[X] Missing PDO driver $pdoDriver\n";
@@ -113,10 +113,31 @@ foreach($dbs AS $dbType => $dbVersions) {
                 'password' => $rootPassword,
                 'dbname'   => ($pdoDriver === 'pgsql' ? 'root' : 'mysql'),
                 'host'     => '127.0.0.1',
+                'port'     => $docker_port,
                 'driver'   => 'pdo_' . $pdoDriver,
             ];
             /** @var \Doctrine\DBAL\Connection $conn */
+
+            try {
             $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+            } catch (Exception $e) {
+                echo "[X] Setup connect fail.\n";
+                print_r($e);
+                continue;
+            }
+
+            if (!$conn) {
+                echo "[X] Setup connect fail (object).\n";
+                continue;
+            }
+
+            try {
+                $conn->connect();
+            } catch (Exception $e) {
+                echo "[X] Connect fail.\n";
+                print_r($e);
+                continue;
+            }
 
             if ($conn) {
                 echo "[.] Connected.\n";
