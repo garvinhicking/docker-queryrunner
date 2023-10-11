@@ -119,7 +119,7 @@ foreach($dbs AS $dbType => $dbVersions) {
             /** @var \Doctrine\DBAL\Connection $conn */
 
             try {
-            $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+                $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
             } catch (Exception $e) {
                 echo "[X] Setup connect fail.\n";
                 print_r($e);
@@ -216,6 +216,23 @@ foreach($dbs AS $dbType => $dbVersions) {
 
 $baseline = $resultOutput[0]['raw'];
 
+echo "EXPECTED RESULT:\n";
+$baselineOut = print_r(unserialize($baseline),1) . "\n";
+echo $baselineOut;
+$fp = fopen('last-result.baseline.txt', 'wb');
+fwrite($fp, $baselineOut);
+fclose($fp);
+
 foreach($resultOutput AS $outRow) {
-    echo $outRow['out'] . ': ' . ($baseline === $outRow['raw'] ? ' SUCCESS' : 'FAIL') . "\n";
+    $success = $baseline === $outRow['raw'];
+    echo $outRow['out'] . ': ' . ($success ? ' SUCCESS' : 'FAIL') . "\n";
+
+    if (!$success) {
+        echo "GOT RESULT:\n";
+        $resultOut = print_r(unserialize($outRow['raw']),1) . "\n";
+        echo $resultOut;
+        $fp = fopen('last-result.' . $outRow['out'] . '.txt', 'wb');
+        fwrite($fp, $resultOut);
+        fclose($fp);
+    }
 }
