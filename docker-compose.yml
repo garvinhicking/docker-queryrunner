@@ -2,7 +2,7 @@ version: '2.3'
 services:
   mysql5-7:
     image: mysql:5.7
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
@@ -13,7 +13,7 @@ services:
 
   mysql8-0:
     image: mysql:8.0
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
@@ -24,7 +24,7 @@ services:
 
   mysql8-1:
     image: mysql:8.1
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
@@ -35,7 +35,7 @@ services:
 
   mariadb10-2:
     image: mariadb:10.2
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root 
     volumes:
@@ -46,7 +46,7 @@ services:
 
   mariadb10-3:
     image: mariadb:10.3
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root 
     volumes:
@@ -57,7 +57,7 @@ services:
 
   mariadb10-4:
     image: mariadb:10.4
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root 
     volumes:
@@ -68,7 +68,7 @@ services:
 
   mariadb10-5:
     image: mariadb:10.5
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root 
     volumes:
@@ -79,7 +79,7 @@ services:
 
   mariadb10-6:
     image: mariadb:10.6
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root 
     volumes:
@@ -90,7 +90,7 @@ services:
 
   mariadb10-7:
     image: mariadb:10.7
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root 
     volumes:
@@ -101,7 +101,7 @@ services:
 
   mariadb10-8:
     image: mariadb:10.8
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root 
     volumes:
@@ -112,7 +112,7 @@ services:
 
   mariadb10-9:
     image: mariadb:10.9
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root 
     volumes:
@@ -123,7 +123,7 @@ services:
 
   mariadb10-10:
     image: mariadb:10.10
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root 
     volumes:
@@ -134,7 +134,7 @@ services:
 
   mariadb10-11:
     image: mariadb:10.11
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root 
     volumes:
@@ -145,7 +145,7 @@ services:
 
   mariadb11-0:
     image: mariadb:11.0
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root 
     volumes:
@@ -156,7 +156,7 @@ services:
 
   mariadb11-1:
     image: mariadb:11.1
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root 
     volumes:
@@ -167,7 +167,7 @@ services:
 
   postgres10:
     image: postgres:10-alpine
-    restart: "always"
+    restart: "no"
     environment:
       POSTGRES_PASSWORD: root
       POSTGRES_USER: root
@@ -179,7 +179,7 @@ services:
 
   postgres11:
     image: postgres:11-alpine
-    restart: "always"
+    restart: "no"
     environment:
       POSTGRES_PASSWORD: root
       POSTGRES_USER: root
@@ -191,7 +191,7 @@ services:
 
   postgres12:
     image: postgres:12-alpine
-    restart: "always"
+    restart: "no"
     environment:
       POSTGRES_PASSWORD: root
       POSTGRES_USER: root
@@ -203,7 +203,7 @@ services:
 
   postgres13:
     image: postgres:13-alpine
-    restart: "always"
+    restart: "no"
     environment:
       POSTGRES_PASSWORD: root
       POSTGRES_USER: root
@@ -215,7 +215,7 @@ services:
 
   postgres14:
     image: postgres:14-alpine
-    restart: "always"
+    restart: "no"
     environment:
       POSTGRES_PASSWORD: root
       POSTGRES_USER: root
@@ -227,7 +227,7 @@ services:
 
   postgres15:
     image: postgres:15-alpine
-    restart: "always"
+    restart: "no"
     environment:
       POSTGRES_PASSWORD: root
       POSTGRES_USER: root
@@ -239,7 +239,7 @@ services:
 
   postgres16:
     image: postgres:16-alpine
-    restart: "always"
+    restart: "no"
     environment:
       POSTGRES_PASSWORD: root
       POSTGRES_USER: root

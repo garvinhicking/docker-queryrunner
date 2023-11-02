@@ -9,11 +9,8 @@ $queryResult = '';
 
 /** @var \Doctrine\DBAL\Connection $conn */
 $query = $conn->createQueryBuilder()
-    ->select('MAX(r.created)', 'r.summary', 'r2.uuid')
-    ->from('sys_http_report', 'r')
-    ->join('r', 'sys_http_report', 'r2', 'r2.summary = r.summary')
-    ->groupBy('r.summary');
-
-echo "SQL: " . $query->getSQL() . "\n";
+    ->select('*')
+    ->from('sys_http_report')
+    ->orderBy('uuid', 'DESC');
 
 $queryResult = $query->executeQuery()->fetchAllAssociative();
