@@ -2,6 +2,8 @@ version: '2.3'
 services:
   mysql5-7:
     image: mysql:5.7
+    #macos compat
+    platform: linux/amd64
     restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root

@@ -1,6 +1,5 @@
 <?php
-$docker_compose = "version: '2.3'
-services:
+$docker_compose = "services:
 ";
 
 require 'config.inc.php';
@@ -43,6 +42,10 @@ foreach($dbs AS $dbType => $dbVersions) {
 				break;
 
 			case 'mysql':
+			        if ($dbVersion === '5.7') {
+			            $docker_compose .= '    # amd64 emulation on macOS' . "\n";
+			            $docker_compose .= '    platform: linux/amd64' . "\n";
+			        }
 				$docker_compose .= '    image: mysql:' . $dbVersion . '
     restart: "always"
     environment:
