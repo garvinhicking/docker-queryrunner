@@ -27,41 +27,53 @@ if (!file_exists($task . '/query.php')) {
     die('Task subdirectory must hold query.php, init.php and fixture.csv.' . "\n");
 }
 
-// Parses fixture data into usable array
-$fp = fopen($task . '/fixture.csv', 'rb');
-$fixture = [];
-$fixtureHead = null;
-$row = 0;
-while (($data = fgetcsv($fp, null, ",", "'", '\\')) !== false) {
-    $row++;
-    $singleFixture = [];
+function getFixture(string $filename): array
+{
+    $fixture = [];
 
-    if ($fixtureHead === null) {
-        // First line is headers
-        $fixtureHead = [];
-        foreach($data AS $headerPart) {
-            $fixtureHead[] = str_replace('`', '', trim($headerPart));
+    if (!file_exists($filename)) {
+        return $fixture;
+    }
+
+    // Parses fixture data into usable array
+    $fp = fopen($filename, 'rb');
+    $fixtureHead = null;
+    $row = 0;
+    while (($data = fgetcsv($fp, null, ",", "'", '\\')) !== false) {
+        $row++;
+        $singleFixture = [];
+
+        if ($fixtureHead === null) {
+            // First line is headers
+            $fixtureHead = [];
+            foreach($data AS $headerPart) {
+                $fixtureHead[] = str_replace('`', '', trim($headerPart));
+            }
+
+            // Ignores first line, no actual data
+            continue;
         }
 
-        // Ignores first line, no actual data
-        continue;
+        if (count($data) == 0) {
+            continue;
+        }
+
+        if (count($data) !== count($fixtureHead)) {
+            echo "[ERROR] CSV mismatch in row " . $row . " of fixture (skipping row):\n";
+            print_r($data);
+            continue;
+        }
+
+        foreach($data AS $idx => $col) {
+            $singleFixture[$fixtureHead[$idx]] = trim($col);
+        }
+        $fixture[] = $singleFixture;
     }
 
-    if (count($data) == 0) {
-        continue;
-    }
-
-    if (count($data) !== count($fixtureHead)) {
-        echo "[ERROR] CSV mismatch in row " . $row . " of fixture (skipping row):\n";
-        print_r($data);
-        continue;
-    }
-
-    foreach($data AS $idx => $col) {
-        $singleFixture[$fixtureHead[$idx]] = trim($col);
-    }
-    $fixture[] = $singleFixture;
+    return $fixture;
 }
+
+$fixture = getFixture($task . '/fixture.csv');
 
 // Inject sqlite (not a docker instance)
 $dbs['sqlite'] = ['base'];
@@ -131,14 +143,6 @@ foreach($dbs AS $dbType => $dbVersions) {
                 continue;
             }
 
-            try {
-                $conn->connect();
-            } catch (Exception $e) {
-                echo "[X] Connect fail.\n";
-                print_r($e);
-                continue;
-            }
-
             if ($conn) {
                 echo "[.] Connected.\n";
 
@@ -186,13 +190,28 @@ foreach($dbs AS $dbType => $dbVersions) {
             }
 
             // Insert fixture
-            echo "[.] Inserting " . count($fixture) . " fixture rows into $schemaName.\n";
-            foreach($fixture AS $fixtureRow) {
-                try {
-                    $conn->insert($schemaName, $fixtureRow);
-                } catch (Exception $e) {
-                    echo "[x] INSERT failure.";
-                    print_r($e);
+            if (is_array($schemaName)) {
+                foreach($schemaName as $singleSchemaName) {
+                    $fixture = getFixture($task . '/fixture-' . $singleSchemaName . '.csv');
+                    echo "[.] [Multi-step fixture] Inserting " . count($fixture) . " fixture rows into $singleSchemaName.\n";
+                    foreach($fixture AS $fixtureRow) {
+                        try {
+                            $conn->insert($singleSchemaName, $fixtureRow);
+                        } catch (Exception $e) {
+                            echo "[x] INSERT failure.";
+                            print_r($e);
+                        }
+                    }
+                }
+            } else {
+                echo "[.] Inserting " . count($fixture) . " fixture rows into $schemaName.\n";
+                foreach($fixture AS $fixtureRow) {
+                    try {
+                        $conn->insert($schemaName, $fixtureRow);
+                    } catch (Exception $e) {
+                        echo "[x] INSERT failure.";
+                        print_r($e);
+                    }
                 }
             }
             echo "[.] Insertion done.\n";

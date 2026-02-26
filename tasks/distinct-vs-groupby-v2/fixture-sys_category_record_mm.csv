@@ -1,0 +1,18 @@
+`uid_local`, `uid_foreign`, `tablenames`, `fieldname`, `sorting`
+1,1,'tt_content','categories',0
+1,1,'tt_content','categories',1
+1,2,'tt_content','categories',2
+1,3,'tt_content','categories',3
+1,99,'tt_content','categories',4
+1,99,'pages','categories',5
+2,1,'tt_content','categories',6
+2,2,'tt_content','categories',7
+2,3,'tt_content','categories',8
+3,1,'tt_content','categories',9
+3,2,'tt_content','categories',10
+3,3,'tt_content','categories',11
+3,99,'tt_content','categories',12
+4,3,'tt_content','categories',13
+4,4,'tt_content','categories',14
+4,99,'pages','categories',15
+5,99,'pages','categories',16
