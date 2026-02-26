@@ -21,3 +21,4 @@ try {
 } catch (Throwable $e) {
     die($e->getMessage());
 }
+

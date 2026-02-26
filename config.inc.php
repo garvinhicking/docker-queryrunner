@@ -15,17 +15,21 @@ $dbs = [
 ];
 
 $ports = [
-    'mysql'     => 13306,
-    'mariadb'   => 14306,
-    'postgres'  => 15432,
-    'sqlite'    => 11337,
+    'mysql'          => 13306,
+    'mysql-strict'   => 16306,
+    'mariadb'        => 14306,
+    'mariadb-strict' => 15306,
+    'postgres'       => 15432,
+    'sqlite'         => 11337,
 ];
 
 $pdoMap = [
-    'mysql'     => 'mysql',
-    'mariadb'   => 'mysql',
-    'sqlite'    => 'sqlite',
-    'postgres'  => 'pgsql',
+    'mysql'          => 'mysql',
+    'mysql-strict'   => 'mysql',
+    'mariadb'        => 'mysql',
+    'mariadb-strict' => 'mysql',
+    'sqlite'         => 'sqlite',
+    'postgres'       => 'pgsql',
 ];
 
 $rootPassword = 'root';

@@ -16,7 +16,7 @@ foreach($dbs AS $dbType => $dbVersions) {
 		switch($dbType) {
 			case 'postgres':
 				$docker_compose .= '    image: postgres:' . $dbVersion . '-alpine
-    restart: "always"
+    restart: "no"
     environment:
       POSTGRES_PASSWORD: ' . $rootPassword . '
       POSTGRES_USER: root
@@ -30,7 +30,7 @@ foreach($dbs AS $dbType => $dbVersions) {
 
 			case 'mariadb':
 				$docker_compose .= '    image: mariadb:' . $dbVersion . '
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: ' . $rootPassword . ' 
     volumes:
@@ -42,12 +42,12 @@ foreach($dbs AS $dbType => $dbVersions) {
 				break;
 
 			case 'mysql':
-			        if ($dbVersion === '5.7') {
-			            $docker_compose .= '    # amd64 emulation on macOS' . "\n";
-			            $docker_compose .= '    platform: linux/amd64' . "\n";
-			        }
+                if ($dbVersion === '5.7') {
+                    $docker_compose .= '    # amd64 emulation on macOS' . "\n";
+                    $docker_compose .= '    platform: linux/amd64' . "\n";
+                }
 				$docker_compose .= '    image: mysql:' . $dbVersion . '
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: ' . $rootPassword . '
     volumes:
@@ -58,6 +58,43 @@ foreach($dbs AS $dbType => $dbVersions) {
 ';
 				break;
 		}
+
+        // Add strict variants
+        if ($dbType === 'mysql') {
+            $docker_compose .= "\n";
+            $docker_compose .= '  ' . $dbType . str_replace('.', '-', $dbVersion) . '-strict:' . "\n";
+            if ($dbVersion === '5.7') {
+                $docker_compose .= '    # amd64 emulation on macOS' . "\n";
+                $docker_compose .= '    platform: linux/amd64' . "\n";
+            }
+            $docker_compose .= '    image: mysql:' . $dbVersion . '
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: ' . $rootPassword . '
+    volumes:
+      - ' . $initDir . '-strict.conf:/etc/mysql/conf.d:rw
+      - ' . $initDir . '-strict:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "' . $ports[$dbType . '-strict'] . ':3306"
+';
+            $ports[$dbType . '-strict']++;
+        }
+        if ($dbType === 'mariadb') {
+            $docker_compose .= "\n";
+            $docker_compose .= '  ' . $dbType . str_replace('.', '-', $dbVersion) . '-strict:' . "\n";
+
+            $docker_compose .= '    image: mariadb:' . $dbVersion . '
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: ' . $rootPassword . ' 
+    volumes:
+      - ' . $initDir . '-strict.conf:/etc/mysql/conf.d:rw
+      - ' . $initDir . '-strict:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "' . $ports[$dbType . '-strict'] . ':3306"
+';
+            $ports[$dbType . '-strict']++;
+        }
 
 		$docker_compose .= "\n";
 		$ports[$dbType]++;

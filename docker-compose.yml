@@ -1,8 +1,8 @@
 services:
   mysql5-7:
-    image: mysql:5.7
-    #macos compat
+    # amd64 emulation on macOS
     platform: linux/amd64
+    image: mysql:5.7
     restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -11,6 +11,19 @@ services:
       - ./files/mysql-5.7:/docker-entrypoint-initdb.d:rw
     ports:
       - "13306:3306"
+
+  mysql5-7-strict:
+    # amd64 emulation on macOS
+    platform: linux/amd64
+    image: mysql:5.7
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./files/mysql-5.7-strict.conf:/etc/mysql/conf.d:rw
+      - ./files/mysql-5.7-strict:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "16306:3306"
 
   mysql8-0:
     image: mysql:8.0
@@ -23,6 +36,17 @@ services:
     ports:
       - "13307:3306"
 
+  mysql8-0-strict:
+    image: mysql:8.0
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./files/mysql-8.0-strict.conf:/etc/mysql/conf.d:rw
+      - ./files/mysql-8.0-strict:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "16307:3306"
+
   mysql8-1:
     image: mysql:8.1
     restart: "no"
@@ -33,6 +57,17 @@ services:
       - ./files/mysql-8.1:/docker-entrypoint-initdb.d:rw
     ports:
       - "13308:3306"
+
+  mysql8-1-strict:
+    image: mysql:8.1
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./files/mysql-8.1-strict.conf:/etc/mysql/conf.d:rw
+      - ./files/mysql-8.1-strict:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "16308:3306"
 
   mariadb10-2:
     image: mariadb:10.2
@@ -45,6 +80,17 @@ services:
     ports:
       - "14306:3306"
 
+  mariadb10-2-strict:
+    image: mariadb:10.2
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.2-strict.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.2-strict:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "15306:3306"
+
   mariadb10-3:
     image: mariadb:10.3
     restart: "no"
@@ -55,6 +101,17 @@ services:
       - ./files/mariadb-10.3:/docker-entrypoint-initdb.d:rw
     ports:
       - "14307:3306"
+
+  mariadb10-3-strict:
+    image: mariadb:10.3
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.3-strict.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.3-strict:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "15307:3306"
 
   mariadb10-4:
     image: mariadb:10.4
@@ -67,6 +124,17 @@ services:
     ports:
       - "14308:3306"
 
+  mariadb10-4-strict:
+    image: mariadb:10.4
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.4-strict.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.4-strict:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "15308:3306"
+
   mariadb10-5:
     image: mariadb:10.5
     restart: "no"
@@ -77,6 +145,17 @@ services:
       - ./files/mariadb-10.5:/docker-entrypoint-initdb.d:rw
     ports:
       - "14309:3306"
+
+  mariadb10-5-strict:
+    image: mariadb:10.5
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.5-strict.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.5-strict:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "15309:3306"
 
   mariadb10-6:
     image: mariadb:10.6
@@ -89,6 +168,17 @@ services:
     ports:
       - "14310:3306"
 
+  mariadb10-6-strict:
+    image: mariadb:10.6
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.6-strict.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.6-strict:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "15310:3306"
+
   mariadb10-7:
     image: mariadb:10.7
     restart: "no"
@@ -99,6 +189,17 @@ services:
       - ./files/mariadb-10.7:/docker-entrypoint-initdb.d:rw
     ports:
       - "14311:3306"
+
+  mariadb10-7-strict:
+    image: mariadb:10.7
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.7-strict.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.7-strict:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "15311:3306"
 
   mariadb10-8:
     image: mariadb:10.8
@@ -111,6 +212,17 @@ services:
     ports:
       - "14312:3306"
 
+  mariadb10-8-strict:
+    image: mariadb:10.8
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.8-strict.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.8-strict:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "15312:3306"
+
   mariadb10-9:
     image: mariadb:10.9
     restart: "no"
@@ -121,6 +233,17 @@ services:
       - ./files/mariadb-10.9:/docker-entrypoint-initdb.d:rw
     ports:
       - "14313:3306"
+
+  mariadb10-9-strict:
+    image: mariadb:10.9
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.9-strict.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.9-strict:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "15313:3306"
 
   mariadb10-10:
     image: mariadb:10.10
@@ -133,6 +256,17 @@ services:
     ports:
       - "14314:3306"
 
+  mariadb10-10-strict:
+    image: mariadb:10.10
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.10-strict.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.10-strict:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "15314:3306"
+
   mariadb10-11:
     image: mariadb:10.11
     restart: "no"
@@ -143,6 +277,17 @@ services:
       - ./files/mariadb-10.11:/docker-entrypoint-initdb.d:rw
     ports:
       - "14315:3306"
+
+  mariadb10-11-strict:
+    image: mariadb:10.11
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-10.11-strict.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-10.11-strict:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "15315:3306"
 
   mariadb11-0:
     image: mariadb:11.0
@@ -155,6 +300,17 @@ services:
     ports:
       - "14316:3306"
 
+  mariadb11-0-strict:
+    image: mariadb:11.0
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-11.0-strict.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-11.0-strict:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "15316:3306"
+
   mariadb11-1:
     image: mariadb:11.1
     restart: "no"
@@ -165,6 +321,17 @@ services:
       - ./files/mariadb-11.1:/docker-entrypoint-initdb.d:rw
     ports:
       - "14317:3306"
+
+  mariadb11-1-strict:
+    image: mariadb:11.1
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+    volumes:
+      - ./files/mariadb-11.1-strict.conf:/etc/mysql/conf.d:rw
+      - ./files/mariadb-11.1-strict:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "15317:3306"
 
   postgres10:
     image: postgres:10-alpine
