@@ -8,7 +8,7 @@ This is a dirty little helper, use at your own risk.
 
 # Usage
 
-`php docker-composer-db.php > docker-compose.yml` creates a `docker-compose.yml` file with the setup.
+`php docker-compose-db.php > docker-compose.yml` creates a `docker-compose.yml` file with the setup.
 
 It reads the configured image names/versions from a `config.inc.php` file.
 
